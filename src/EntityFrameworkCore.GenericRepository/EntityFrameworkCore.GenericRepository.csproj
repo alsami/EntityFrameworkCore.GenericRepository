@@ -1,6 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Copyright>2018©CleanCode-Labs</Copyright>
+    <Authors>Sami Al Khatib</Authors>
+    <PackageId>CleanCodeLabs.EntityFrameworkCore.GenericRepository</PackageId>
+    <Title>EntityFrameworkCore-Generic-Repository</Title>
+    <Description>A generic repositry implementation using entityframeworkcore, that can be used and extended easily.</Description>
+    <PackageProjectUrl>https://github.com/cleancodelabs/EntityFrameworkCore.GenericRepository</PackageProjectUrl>
+    <PackageTags>EntityFramework, EntityframeworkCore, Generic, Repository, Unambitious</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git:/github.com/cleancodelabs/EntityFrameworkCore.GenericRepository</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityFrameworkCore.GenericRepository.Abstractions\EntityFrameworkCore.GenericRepository.Abstractions.csproj" />

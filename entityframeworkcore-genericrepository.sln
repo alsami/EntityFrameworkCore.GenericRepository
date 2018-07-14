@@ -14,6 +14,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkCore.Generic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.GenericRepository.IntegrationTests", "test\EntityFramework.GenericRepository.IntegrationTests\EntityFramework.GenericRepository.IntegrationTests.csproj", "{9857F148-848F-406A-B5EE-994F3CFC5E66}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{7216EC4B-E9BD-4686-954D-8E4FAC869EA6}"
+ProjectSection(SolutionItems) = preProject
+	build-packages.sh = build-packages.sh
+	.gitignore = .gitignore
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
