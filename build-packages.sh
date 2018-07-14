@@ -2,6 +2,6 @@
 cd src/
 for d in */; do 
     if [ -d ${d} ]; then
-        cd ${d} && dotnet pack *.csproj --include-symbols --output "../../build" && cd ..; 
+        cd ${d} && dotnet pack *.csproj --include-symbols -c Release --output "../../build" && cd ..; 
     fi
 done

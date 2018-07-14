@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{7216EC4B-E
 ProjectSection(SolutionItems) = preProject
 	build-packages.sh = build-packages.sh
 	.gitignore = .gitignore
+	licence.md = licence.md
+	readme.md = readme.md
 EndProjectSection
 EndProject
 Global
