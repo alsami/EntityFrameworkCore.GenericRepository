@@ -22,6 +22,12 @@ ProjectSection(SolutionItems) = preProject
 	readme.md = readme.md
 EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{2A519AEA-8377-423A-9866-0553C3FEDD01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkCore.GenericRepository.Samples.Shared", "samples\EntityFrameworkCore.GenericRepository.Samples.Shared\EntityFrameworkCore.GenericRepository.Samples.Shared.csproj", "{084BE624-885C-4A59-A36E-8F2169F830A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkCore.GenericRepository.Samples.WebApi", "samples\EntityFrameworkCore.GenericRepository.Samples.WebApi\EntityFrameworkCore.GenericRepository.Samples.WebApi.csproj", "{E159F6C3-DB8B-47CB-B2AF-F021121C2E72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,8 @@ Global
 		{53E96118-A79A-46FC-ADBB-90617A4FD8E1} = {84722122-E44C-41CE-AE5F-F5C8462E5C72}
 		{5703D02D-8D52-4F8E-9E2F-8AC7EBF2F15A} = {AA0A4060-012F-402C-989B-4C2BE5612502}
 		{9857F148-848F-406A-B5EE-994F3CFC5E66} = {AA0A4060-012F-402C-989B-4C2BE5612502}
+		{084BE624-885C-4A59-A36E-8F2169F830A1} = {2A519AEA-8377-423A-9866-0553C3FEDD01}
+		{E159F6C3-DB8B-47CB-B2AF-F021121C2E72} = {2A519AEA-8377-423A-9866-0553C3FEDD01}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9962A9CC-12DD-4DBF-A33E-52A5E6D79AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -55,5 +63,13 @@ Global
 		{9857F148-848F-406A-B5EE-994F3CFC5E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9857F148-848F-406A-B5EE-994F3CFC5E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9857F148-848F-406A-B5EE-994F3CFC5E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{084BE624-885C-4A59-A36E-8F2169F830A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084BE624-885C-4A59-A36E-8F2169F830A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084BE624-885C-4A59-A36E-8F2169F830A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084BE624-885C-4A59-A36E-8F2169F830A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E159F6C3-DB8B-47CB-B2AF-F021121C2E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E159F6C3-DB8B-47CB-B2AF-F021121C2E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E159F6C3-DB8B-47CB-B2AF-F021121C2E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E159F6C3-DB8B-47CB-B2AF-F021121C2E72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
