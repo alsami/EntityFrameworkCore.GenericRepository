@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.2</LangVersion>
-    <Version>1.2.0</Version>
-    <FileVersion>1.2.0.0</FileVersion>
+    <Version>1.3.0</Version>
+    <FileVersion>1.3.0.0</FileVersion>
     <Copyright>2018©CleanCode-Labs</Copyright>
     <Authors>Sami Al Khatib</Authors>
     <PackageId>CleanCodeLabs.EntityFrameworkCore.GenericRepository.Shared</PackageId>
