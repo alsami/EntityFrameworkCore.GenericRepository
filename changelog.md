@@ -1,9 +1,29 @@
-# EntityFrameworkCore.GenericRepository
+# [1.3.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/1.3.0) (2018-07-18)
 
-## Available packages
+## Features
 
-|Version| Downloads| Package-Id |
-| ----- | -------  | ------ |
-|[![NuGet](https://img.shields.io/nuget/vpre/CleanCodeLabs.EntityFrameworkCore.GenericRepository.Shared.svg)](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository.Shared)|[![NuGet](https://img.shields.io/nuget/dt/CleanCodeLabs.EntityFrameworkCore.GenericRepository.Shared.svg)](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository.Shared)| CleanCodeLabs.EntityFrameworkCore.GenericRepository.Shared|
-|[![NuGet](https://img.shields.io/nuget/vpre/CleanCodeLabs.EntityFrameworkCore.GenericRepository.Abstractions.svg)](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository.Abstractions)|[![NuGet](https://img.shields.io/nuget/dt/CleanCodeLabs.EntityFrameworkCore.GenericRepository.Abstractions.svg)](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository.Abstractions)| CleanCodeLabs.EntityFrameworkCore.GenericRepository.Abstractions|
-|[![NuGet](https://img.shields.io/nuget/vpre/CleanCodeLabs.EntityFrameworkCore.GenericRepository.svg)](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository)|[![NuGet](https://img.shields.io/nuget/dt/CleanCodeLabs.EntityFrameworkCore.GenericRepository.svg)](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository)| CleanCodeLabs.EntityFrameworkCore.GenericRepository|
+* Add paging-repository implementation
+* Add base implementation for usage in both repositories 
+
+# [1.2.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/1.2.0) (2018-07-16)
+
+## Features
+
+* Add most common basetypes containing only the primary key of an entity (string, long, int and guid)
+
+# [1.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/1.0.0) (2018-07-14)
+
+## Features
+
+* Reading all entities of a specific type async and sync
+* Reading all entities of a specific type async and sync including it's children
+* Searching all entities of a specific type async and sync with a given predicate including it's children
+* Searching for an entity of a specific type async and sync with a given id
+* Searching for an entity of a specific type async and sync with a given id and including it's children
+* Searching for an entity of a specific type async and sync using a predicate
+* Searching for an entity of a specific type async and sync using a predicate and including it's children
+* Counting all entities of a specific type async and sync
+* Creat a query for a given type so you can add more dynamic code within your code
+* Adding an entity of a specific type async and sync
+* Updating an entity of a specific type async and sync
+* Saving changes async and sync
