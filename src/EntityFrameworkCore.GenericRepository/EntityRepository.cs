@@ -4,16 +4,18 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using EntityFrameworkCore.GenericRepository.Abstractions;
+using EntityFrameworkCore.GenericRepository.Base;
+using EntityFrameworkCore.GenericRepository.Extensions;
 using EntityFrameworkCore.GenericRepository.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.GenericRepository
 {
-    public class EntityRepository<TEntity, TId> : IEntityRepository<TEntity, TId> where TEntity : class, IEntity<TId>, new() where TId : IEquatable<TId>
+    public class EntityRepository<TEntity, TId> : CommonEntityRepository<TEntity, TId>, IEntityRepository<TEntity, TId> where TEntity : class, IEntity<TId>, new() where TId : IEquatable<TId>
     {
         private readonly GenericRepositoryContext context;
 
-        public EntityRepository(GenericRepositoryContext context)
+        public EntityRepository(GenericRepositoryContext context) : base(context)
         {
             this.context = context;
         }
@@ -161,46 +163,6 @@ namespace EntityFrameworkCore.GenericRepository
             var modifiedCount = await this.context.SaveChangesAsync();
 
             return modifiedCount > 0;
-        }
-
-        public virtual IQueryable<TEntity> GetQueryAble(bool noTracking = false)
-        {
-            return noTracking
-                ? this.CreateQuery().AsNoTracking()
-                : this.CreateQuery();
-        }
-
-        public virtual int Count()
-        {
-            return this.CreateQuery()
-                .Select(entity => entity.Id)
-                .Count();
-        }
-
-        public virtual async Task<int> CountAsync()
-        {
-            return await this.CreateQuery()
-                .Select(entity => entity.Id)
-                .CountAsync()
-                .ConfigureAwait(false);
-        }
-
-        public void Dispose()
-        {
-            this.context?.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        private IQueryable<TEntity> BuildIncludes(params Expression<Func<TEntity, object>>[] includes)
-        {
-            var query = this.CreateQuery();
-
-            return includes.Aggregate(query, (current, include) => current.Include(include));
-        }
-
-        private IQueryable<TEntity> CreateQuery()
-        {
-            return this.context.Set<TEntity>().AsQueryable();
         }
     }
 }

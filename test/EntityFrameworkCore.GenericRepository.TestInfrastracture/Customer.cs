@@ -12,6 +12,8 @@ namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
 
         public virtual ICollection<Address> Addresses { get; set; }
 
+        public int CustomerNumber { get; set; }
+
         public Customer()
         {
             this.Addresses = new List<Address>();

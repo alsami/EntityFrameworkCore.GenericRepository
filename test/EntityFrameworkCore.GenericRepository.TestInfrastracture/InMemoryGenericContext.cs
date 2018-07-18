@@ -18,7 +18,7 @@ namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
                 ebuilder.HasKey(customer => customer.Id);
 
                 ebuilder.HasIndex(customer => customer.Name)
-                    .IsUnique(true);
+                    .IsUnique();
             }
             
             {
