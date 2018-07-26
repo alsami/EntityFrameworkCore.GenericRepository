@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using EntityFrameworkCore.GenericRepository.Samples.WebApi.Dtos;
 
-namespace EntityFrameworkCore.GenericRepository.Samples.WebApi.Controllers
+namespace EntityFrameworkCore.GenericRepository.Samples.WebApi.Dtos
 {
     public class CustomerDto
     {

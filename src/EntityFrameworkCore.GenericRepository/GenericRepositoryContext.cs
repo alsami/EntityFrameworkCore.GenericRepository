@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace EntityFrameworkCore.GenericRepository.Abstractions
+namespace EntityFrameworkCore.GenericRepository
 {
     public abstract class GenericRepositoryContext : DbContext
     {

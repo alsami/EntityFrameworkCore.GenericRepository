@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EntityFrameworkCore.GenericRepository.Samples.Shared.Entities;
 using EntityFrameworkCore.GenericRepository.Samples.WebApi.Controllers;
+using EntityFrameworkCore.GenericRepository.Samples.WebApi.Dtos;
 
 namespace EntityFrameworkCore.GenericRepository.Samples.WebApi.Profiles
 {

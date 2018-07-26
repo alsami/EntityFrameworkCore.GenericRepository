@@ -1,3 +1,19 @@
+# [2.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/1.3.0) (2018-07-26)
+
+## Breaking changes
+
+* Move the dbcontext abstractions to implementation package, so abstractions do not know of implementation details
+
+Before version 2.0.0:
+```c#
+import EntityFrameworkCore.GenericRepository.Abstractions
+```
+
+With version 2.0.0:
+```c#
+import EntityFrameworkCore.GenericRepository
+```
+
 # [1.3.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/1.3.0) (2018-07-18)
 
 ## Features

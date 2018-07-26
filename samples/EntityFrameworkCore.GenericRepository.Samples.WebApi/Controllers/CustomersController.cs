@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using EntityFrameworkCore.GenericRepository.Abstractions;
 using EntityFrameworkCore.GenericRepository.Samples.Shared.Entities;
+using EntityFrameworkCore.GenericRepository.Samples.WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntityFrameworkCore.GenericRepository.Samples.WebApi.Controllers
