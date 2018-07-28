@@ -11,12 +11,12 @@
 
 Before version 2.0.0:
 ```c#
-import EntityFrameworkCore.GenericRepository.Abstractions
+using EntityFrameworkCore.GenericRepository.Abstractions;
 ```
 
 With version 2.0.0:
 ```c#
-import EntityFrameworkCore.GenericRepository
+using EntityFrameworkCore.GenericRepository;
 ```
 
 # [1.3.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/1.3.0) (2018-07-18)
