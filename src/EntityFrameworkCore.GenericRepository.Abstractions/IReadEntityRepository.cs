@@ -43,5 +43,9 @@ namespace EntityFrameworkCore.GenericRepository.Abstractions
 
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate,
             params Expression<Func<TEntity, object>>[] includes);
+        
+        bool HasMatching(Expression<Func<TEntity, bool>> predicate);
+
+        Task<bool> HasMatchingAsync(Expression<Func<TEntity, bool>> predicate);
     }
 }

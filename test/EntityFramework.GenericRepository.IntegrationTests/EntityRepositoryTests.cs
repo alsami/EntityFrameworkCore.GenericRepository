@@ -75,6 +75,10 @@ namespace EntityFramework.GenericRepository.IntegrationTests
                     await this.repository.FindAsync(customer => customer.Id == id, customer => customer.Addresses);
 
                 Assert.Equal(newName, existingCustomer.Name);
+
+                var hasMatchingByNewName = await this.repository.HasMatchingAsync(customer => customer.Name == newName);
+                
+                Assert.True(hasMatchingByNewName);
             }
 
             var allCustomers = await this.repository.GetAllAsync();
@@ -158,6 +162,10 @@ namespace EntityFramework.GenericRepository.IntegrationTests
                 existingCustomer = this.repository.Find(customer => customer.Id == id, customer => customer.Addresses);
 
                 Assert.Equal(newName, existingCustomer.Name);
+
+                var hasMatchingByNewName = this.repository.HasMatching(customer => customer.Name == newName);
+                
+                Assert.True(hasMatchingByNewName);
             }
 
             var allCustomers = this.repository.GetAll();

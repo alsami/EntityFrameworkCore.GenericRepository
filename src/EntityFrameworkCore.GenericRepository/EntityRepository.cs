@@ -127,6 +127,18 @@ namespace EntityFrameworkCore.GenericRepository
                 .ConfigureAwait(false);
         }
 
+        public bool HasMatching(Expression<Func<TEntity, bool>> predicate)
+        {
+            return this.GetQueryAble(true)
+                .Any(predicate);
+        }
+
+        public async Task<bool> HasMatchingAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await  this.GetQueryAble(true)
+                .AnyAsync(predicate);
+        }
+
         public virtual void Add(TEntity entity)
         {
             this.context.Set<TEntity>().Add(entity);
