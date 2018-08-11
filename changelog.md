@@ -2,8 +2,7 @@
 
 * Update interface and add functionality to check if matching elements are available 
 
-
-# [2.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.0.1) (2018-07-28)
+# [2.0.1](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.0.1) (2018-07-28)
 
 * Update dependencies
 * Remove entityframework-dependency from abstractions project
