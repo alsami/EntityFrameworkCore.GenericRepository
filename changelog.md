@@ -1,4 +1,8 @@
-# [2.1.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.0.1) (2018-08-11)
+# [2.1.1](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.1.1) (2018-08-27)
+
+* Update ef-core dependencies to 2.1.2
+
+# [2.1.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.1.0) (2018-08-11)
 
 * Update interface and add functionality to check if matching elements are available 
 
