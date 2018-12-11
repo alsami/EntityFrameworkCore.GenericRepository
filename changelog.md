@@ -1,3 +1,7 @@
+# [2.2.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.0.0) (2018-12-11)
+
+* Update ef-core dependencies to 2.2.0
+
 # [2.1.1](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.1.1) (2018-08-27)
 
 * Update ef-core dependencies to 2.1.2
