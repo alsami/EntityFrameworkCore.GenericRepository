@@ -16,11 +16,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.GenericRepo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{7216EC4B-E9BD-4686-954D-8E4FAC869EA6}"
 ProjectSection(SolutionItems) = preProject
-	build-packages.sh = build-packages.sh
 	.gitignore = .gitignore
 	licence.md = licence.md
 	readme.md = readme.md
 	changelog.md = changelog.md
+	publish-packages.sh = publish-packages.sh
+	.travis.yml = .travis.yml
+	run-tests.sh = run-tests.sh
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{2A519AEA-8377-423A-9866-0553C3FEDD01}"

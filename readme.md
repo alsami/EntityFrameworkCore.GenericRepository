@@ -1,5 +1,9 @@
 # EntityFrameworkCore.GenericRepository
 
+## Current build
+
+[![Build Status](https://travis-ci.com/cleancodelabs/EntityFrameworkCore.GenericRepository.svg?branch=master)](https://travis-ci.com/cleancodelabs/EntityFrameworkCore.GenericRepository)
+
 ## Available packages
 
 |Version| Downloads| Package-Id |
