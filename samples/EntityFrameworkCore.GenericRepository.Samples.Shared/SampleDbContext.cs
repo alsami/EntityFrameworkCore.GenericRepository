@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.GenericRepository.Samples.Shared
 {
-    public class SampleDbContext : GenericRepositoryContext
+    public class SampleDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

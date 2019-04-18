@@ -11,8 +11,6 @@ namespace EntityFramework.GenericRepository.Tests
 {
     public class EntityRepositoryTests
     {
-        private readonly IEntityRepository<Customer, Guid> repository;
-
         private readonly string[] cities =
         {
             "Amsterdam",
@@ -35,20 +33,17 @@ namespace EntityFramework.GenericRepository.Tests
             "Random Company",
         };
 
-        public EntityRepositoryTests()
-        {
-            this.repository = new EntityRepository<Customer, Guid>(new InMemoryGenericContext());
-        }
-
         [Fact]
         public async Task GenericEntityRepository_CreateReadUpdateDeleteMultipleAsync_ExpectSuccess()
         {
             var createCustomers = this.CreateRandom(5, 3);
 
+            var repository = CreateRepository();
+
             foreach (var createCustomer in createCustomers)
             {
-                await this.repository.AddAsync(createCustomer);
-                var added = await this.repository.EnsureChangesAsync();
+                await repository.AddAsync(createCustomer);
+                var added = await repository.EnsureChangesAsync();
                 Assert.True(added);
             }
 
@@ -57,7 +52,7 @@ namespace EntityFramework.GenericRepository.Tests
             foreach (var id in createIds)
             {
                 var existingCustomer =
-                    await this.repository.FindAsync(customer => customer.Id == id, customer => customer.Addresses);
+                    await repository.FindAsync(customer => customer.Id == id, customer => customer.Addresses);
 
                 Assert.NotNull(existingCustomer);
                 Assert.True(existingCustomer.Addresses.Count == 3);
@@ -66,25 +61,25 @@ namespace EntityFramework.GenericRepository.Tests
 
                 existingCustomer.Name = newName;
 
-                this.repository.Edit(existingCustomer);
-                var updated = await this.repository.EnsureChangesAsync();
+                repository.Edit(existingCustomer);
+                var updated = await repository.EnsureChangesAsync();
                 Assert.True(updated);
 
                 existingCustomer =
-                    await this.repository.FindAsync(customer => customer.Id == id, customer => customer.Addresses);
+                    await repository.FindAsync(customer => customer.Id == id, customer => customer.Addresses);
 
                 Assert.Equal(newName, existingCustomer.Name);
 
-                var hasMatchingByNewName = await this.repository.HasMatchingAsync(customer => customer.Name == newName);
+                var hasMatchingByNewName = await repository.HasMatchingAsync(customer => customer.Name == newName);
                 
                 Assert.True(hasMatchingByNewName);
             }
 
-            var allCustomers = await this.repository.GetAllAsync();
+            var allCustomers = await repository.GetAllAsync();
 
             Assert.True(createIds.All(createId => allCustomers.Select(customer => customer.Id).Contains(createId)));
 
-            allCustomers = await this.repository.FindAllAsync(customer => customer.Name.StartsWith("NewName"),
+            allCustomers = await repository.FindAllAsync(customer => customer.Name.StartsWith("NewName"),
                 customer => customer.Addresses);
 
             var customersArray = allCustomers as Customer[] ?? allCustomers.ToArray();
@@ -104,22 +99,22 @@ namespace EntityFramework.GenericRepository.Tests
 
             foreach (var id in createIds)
             {
-                var existingCustomer = await this.repository.FindAsync(id);
+                var existingCustomer = await repository.FindAsync(id);
 
                 Assert.NotNull(existingCustomer);
 
-                existingCustomer = await this.repository.FindAsync(customer => customer.Name == $"NewName_{id}");
+                existingCustomer = await repository.FindAsync(customer => customer.Name == $"NewName_{id}");
 
                 Assert.NotNull(existingCustomer);
 
-                this.repository.Delete(existingCustomer);
+                repository.Delete(existingCustomer);
 
-                var deleted = await this.repository.EnsureChangesAsync();
+                var deleted = await repository.EnsureChangesAsync();
 
                 Assert.True(deleted);
             }
 
-            allCustomers = await this.repository.GetAllAsync();
+            allCustomers = await repository.GetAllAsync();
 
             customersArray = allCustomers as Customer[] ?? allCustomers.ToArray();
 
@@ -133,11 +128,13 @@ namespace EntityFramework.GenericRepository.Tests
         public void GenericEntityRepository_CreateReadUpdateDeleteMultiple_ExpectSuccess()
         {
             var createCustomers = this.CreateRandom(5, 3);
+            
+            var repository = CreateRepository();
 
             foreach (var createCustomer in createCustomers)
             {
-                this.repository.Add(createCustomer);
-                var added = this.repository.EnsureChanges();
+                repository.Add(createCustomer);
+                var added = repository.EnsureChanges();
                 Assert.True(added);
             }
 
@@ -145,7 +142,7 @@ namespace EntityFramework.GenericRepository.Tests
 
             foreach (var id in createIds)
             {
-                var existingCustomer = this.repository.Find(customer => customer.Id == id, customer => customer.Addresses);
+                var existingCustomer = repository.Find(customer => customer.Id == id, customer => customer.Addresses);
 
                 Assert.NotNull(existingCustomer);
                 Assert.True(existingCustomer.Addresses.Count == 3);
@@ -154,25 +151,25 @@ namespace EntityFramework.GenericRepository.Tests
 
                 existingCustomer.Name = newName;
 
-                this.repository.Edit(existingCustomer);
-                var updated = this.repository.EnsureChanges();
+                repository.Edit(existingCustomer);
+                var updated = repository.EnsureChanges();
                 Assert.True(updated);
 
-                existingCustomer = this.repository.Find(customer => customer.Id == id, customer => customer.Addresses);
+                existingCustomer = repository.Find(customer => customer.Id == id, customer => customer.Addresses);
 
                 Assert.Equal(newName, existingCustomer.Name);
 
-                var hasMatchingByNewName = this.repository.HasMatching(customer => customer.Name == newName);
+                var hasMatchingByNewName = repository.HasMatching(customer => customer.Name == newName);
                 
                 Assert.True(hasMatchingByNewName);
             }
 
-            var allCustomers = this.repository.GetAll();
+            var allCustomers = repository.GetAll();
 
             Assert.True(createCustomers.Select(customer => customer.Id).All(createId =>
                 allCustomers.Select(customer => customer.Id).Contains(createId)));
 
-            allCustomers = this.repository.FindAll(customer => customer.Name.StartsWith("NewName"),
+            allCustomers = repository.FindAll(customer => customer.Name.StartsWith("NewName"),
                 customer => customer.Addresses);
 
             var customersArray = allCustomers as Customer[] ?? allCustomers.ToArray();
@@ -192,22 +189,22 @@ namespace EntityFramework.GenericRepository.Tests
 
             foreach (var id in createIds)
             {
-                var existingCustomer = this.repository.Find(id);
+                var existingCustomer = repository.Find(id);
 
                 Assert.NotNull(existingCustomer);
 
-                existingCustomer = this.repository.Find(customer => customer.Name == $"NewName_{id}");
+                existingCustomer = repository.Find(customer => customer.Name == $"NewName_{id}");
 
                 Assert.NotNull(existingCustomer);
 
-                this.repository.Delete(existingCustomer);
+                repository.Delete(existingCustomer);
 
-                var deleted = this.repository.EnsureChanges();
+                var deleted = repository.EnsureChanges();
 
                 Assert.True(deleted);
             }
 
-            allCustomers = this.repository.GetAll();
+            allCustomers = repository.GetAll();
 
             customersArray = allCustomers as Customer[] ?? allCustomers.ToArray();
 
@@ -221,34 +218,236 @@ namespace EntityFramework.GenericRepository.Tests
         public async Task GenericEntityRepositoryTests_CreateCountMultipleAsync_ExpectSuccess()
         {
             var createCustomers = this.CreateRandom(5);
+            
+            var repository = CreateRepository();
 
             foreach (var customer in createCustomers)
             {
-                await this.repository.AddAsync(customer);
-                var added = await this.repository.EnsureChangesAsync();
+                await repository.AddAsync(customer);
+                var added = await repository.EnsureChangesAsync();
                 Assert.True(added);
             }
 
-            var count = await this.repository.CountAsync();
+            var count = await repository.CountAsync();
 
-            Assert.True(5 <= count);
+            Assert.Equal(5, count);
         }
 
         [Fact]
         public void GenericEntityRepositoryTests_CreateCountMultiple_ExpectSuccess()
         {
             var createCustomers = this.CreateRandom(5);
+            
+            var repository = CreateRepository();
 
             foreach (var createCustomer in createCustomers)
             {
-                this.repository.Add(createCustomer);
-                var added = this.repository.EnsureChanges();
+                repository.Add(createCustomer);
+                var added = repository.EnsureChanges();
                 Assert.True(added);
             }
 
-            var count = this.repository.Count();
+            var count = repository.Count();
 
-            Assert.True(5 <= count);
+            Assert.Equal(5, count);
+        }
+
+        [Fact]
+        public void GenericRepositoryTests_AddMany_Expect_Amount_Added()
+        {
+            var createCustomer = this.CreateRandom(100);
+            var repository = CreateRepository();
+            
+            repository.AddMany(createCustomer);
+            repository.EnsureChanges();
+            
+            Assert.Equal(100, repository.Count());
+        }
+        
+        [Fact]
+        public async Task GenericRepositoryTests_AddManyAsync_Expect_Amount_Added()
+        {
+            var createCustomer = this.CreateRandom(100);
+            var repository = CreateRepository();
+            
+            await repository.AddManyAsync(createCustomer);
+            await repository.EnsureChangesAsync();
+            
+            Assert.Equal(100, await repository.CountAsync());
+        }
+
+        [Fact]
+        public void GenericEntityRepositoryTests_GetAllProjected_Expect_Projection()
+        {
+            var createCustomers = this.CreateRandom(5);
+            var repository = CreateRepository();
+            repository.AddMany(createCustomers);
+            repository.EnsureChanges();
+
+            var projected = repository.GetAll(customer 
+                => new CustomerDto(customer.Name, customer.Addresses.Select(address => new AddressDto(address.City)).ToArray()));
+            
+            var customerDtos = projected as CustomerDto[] ?? projected.ToArray();
+            
+            Assert.NotEmpty(customerDtos);
+            Assert.Equal(5, customerDtos.Count());
+            Assert.Equal(createCustomers.OrderBy(customer => customer.Name).Select(customer => customer.Name), customerDtos.OrderBy(customerDto => customerDto.Name).Select(x => x.Name));
+        }
+        
+        [Fact]
+        public async Task GenericEntityRepositoryTests_GetAllProjectedAsync_Expect_Projection()
+        {
+            var createCustomers = this.CreateRandom(5);
+            var repository = CreateRepository();
+            await repository.AddManyAsync(createCustomers);
+            await repository.EnsureChangesAsync();
+
+            var projected = await repository.GetAllAsync(customer 
+                => new CustomerDto(customer.Name, customer.Addresses.Select(address => new AddressDto(address.City)).ToArray()));
+            
+            var customerDtos = projected as CustomerDto[] ?? projected.ToArray();
+            
+            Assert.NotEmpty(customerDtos);
+            Assert.Equal(5, customerDtos.Count());
+            Assert.Equal(createCustomers.OrderBy(customer => customer.Name).Select(customer => customer.Name), customerDtos.OrderBy(customerDto => customerDto.Name).Select(x => x.Name));
+        }
+        
+        [Fact]
+        public void GenericEntityRepositoryTests_GetAllProjected_Includes_Expect_Projection()
+        {
+            var createCustomers = this.CreateRandom(5, 10);
+            var repository = CreateRepository();
+            repository.AddMany(createCustomers);
+            repository.EnsureChanges();
+
+            var projected = repository.GetAll(customer 
+                => new CustomerDto(customer.Name, customer.Addresses.Select(address => new AddressDto(address.City)).ToArray()), customer => customer.Addresses);
+            
+            var customerDtos = projected as CustomerDto[] ?? projected.ToArray();
+            
+            Assert.NotEmpty(customerDtos);
+            foreach (var customerDto in customerDtos)
+            {
+                Assert.Equal(10, customerDto.Addresses.Count);
+            }
+            Assert.Equal(5, customerDtos.Count());
+            Assert.Equal(createCustomers.OrderBy(customer => customer.Name).Select(customer => customer.Name), customerDtos.OrderBy(customerDto => customerDto.Name).Select(x => x.Name));
+        }
+        
+        [Fact]
+        public async Task GenericEntityRepositoryTests_GetAllProjectedAsync_Includes_Expect_Projection()
+        {
+            var createCustomers = this.CreateRandom(5, 10);
+            var repository = CreateRepository();
+            await repository.AddManyAsync(createCustomers);
+            await repository.EnsureChangesAsync();
+
+            var projected = await repository.GetAllAsync(customer 
+                => new CustomerDto(customer.Name, customer.Addresses.Select(address => new AddressDto(address.City)).ToArray()));
+            
+            var customerDtos = projected as CustomerDto[] ?? projected.ToArray();
+            
+            Assert.NotEmpty(customerDtos);
+            foreach (var customerDto in customerDtos)
+            {
+                Assert.Equal(10, customerDto.Addresses.Count);
+            }
+            Assert.Equal(5, customerDtos.Count());
+            Assert.Equal(createCustomers.OrderBy(customer => customer.Name).Select(customer => customer.Name), customerDtos.OrderBy(customerDto => customerDto.Name).Select(x => x.Name));
+        }
+        
+        [Fact]
+        public void GenericEntityRepositoryTests_FindAll_With_Addresses_Expect_Projection()
+        {
+            var createCustomers = this.CreateRandom(5, 10).Concat(this.CreateRandom(10)).ToArray();
+            var repository = CreateRepository();
+            repository.AddMany(createCustomers);
+            repository.EnsureChanges();
+
+            var projected = repository.FindAll(customer 
+                => new CustomerDto(customer.Name, customer.Addresses.Select(address => new AddressDto(address.City)).ToArray()), 
+                customer => customer.Addresses.Any());
+            
+            var customerDtos = projected as CustomerDto[] ?? projected.ToArray();
+            
+            Assert.NotEmpty(customerDtos);
+            Assert.Equal(5, customerDtos.Count());
+            foreach (var customerDto in customerDtos)
+            {
+                Assert.Equal(10, customerDto.Addresses.Count);
+            }
+            Assert.Equal(5, customerDtos.Count());
+        }
+        
+        [Fact]
+        public async Task GenericEntityRepositoryTests_FindAllAsync_With_Addresses_Expect_Projection()
+        {
+            var createCustomers = this.CreateRandom(5, 10).Concat(this.CreateRandom(10)).ToArray();
+            var repository = CreateRepository();
+            await repository.AddManyAsync(createCustomers);
+            await repository.EnsureChangesAsync();
+
+            var projected = await repository.FindAllAsync(customer 
+                => new CustomerDto(customer.Name, customer.Addresses.Select(address => new AddressDto(address.City)).ToArray()), 
+                customer => customer.Addresses.Any());
+            
+            var customerDtos = projected as CustomerDto[] ?? projected.ToArray();
+            
+            Assert.NotEmpty(customerDtos);
+            Assert.Equal(5, customerDtos.Count());
+            foreach (var customerDto in customerDtos)
+            {
+                Assert.Equal(10, customerDto.Addresses.Count);
+            }
+            Assert.Equal(5, customerDtos.Count());
+        }
+        
+        //
+        
+        [Fact]
+        public void GenericEntityRepositoryTests_FindAll_With_Addresses_Includes_Expect_Projection()
+        {
+            var createCustomers = this.CreateRandom(5, 10).Concat(this.CreateRandom(10)).ToArray();
+            var repository = CreateRepository();
+            repository.AddMany(createCustomers);
+            repository.EnsureChanges();
+
+            var projected = repository.FindAll(customer 
+                => new CustomerDto(customer.Name, customer.Addresses.Select(address => new AddressDto(address.City)).ToArray()), 
+                customer => customer.Addresses.Any(), customer => customer.Addresses);
+            
+            var customerDtos = projected as CustomerDto[] ?? projected.ToArray();
+            
+            Assert.NotEmpty(customerDtos);
+            Assert.Equal(5, customerDtos.Count());
+            foreach (var customerDto in customerDtos)
+            {
+                Assert.Equal(10, customerDto.Addresses.Count);
+            }
+            Assert.Equal(5, customerDtos.Count());
+        }
+        
+        [Fact]
+        public async Task GenericEntityRepositoryTests_FindAllAsync_With_Addresses_Includes_Expect_Projection()
+        {
+            var createCustomers = this.CreateRandom(5, 10).Concat(this.CreateRandom(10)).ToArray();
+            var repository = CreateRepository();
+            await repository.AddManyAsync(createCustomers);
+            await repository.EnsureChangesAsync();
+
+            var projected = await repository.FindAllAsync(customer 
+                => new CustomerDto(customer.Name, customer.Addresses.Select(address => new AddressDto(address.City)).ToArray()), 
+                customer => customer.Addresses.Any(), customer => customer.Addresses);
+            
+            var customerDtos = projected as CustomerDto[] ?? projected.ToArray();
+            
+            Assert.NotEmpty(customerDtos);
+            Assert.Equal(5, customerDtos.Count());
+            foreach (var customerDto in customerDtos)
+            {
+                Assert.Equal(10, customerDto.Addresses.Count);
+            }
+            Assert.Equal(5, customerDtos.Count());
         }
 
         private ICollection<Customer> CreateRandom(int customersCount = 1, int children = 0)
@@ -284,10 +483,12 @@ namespace EntityFramework.GenericRepository.Tests
                 Id = Guid.NewGuid(),
                 CustomerId = customerId,
                 City = this.cities[random.Next(0, this.cities.Length - 1)],
-                PostalCode = random.Next(1111, 9999).ToString(),
+                PostalCode = random.Next(1, 999999).ToString(),
                 Street = "abcdfgh"
-                
             };
         }
+        
+        private static IEntityRepository<Customer, Guid> CreateRepository()
+            => new EntityRepository<Customer, Guid>(new InMemoryGenericContext());
     }
 }

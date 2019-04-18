@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
 {
-    public class InMemoryGenericContext : GenericRepositoryContext
+    public class InMemoryGenericContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("InMemoryTestDb");
+            optionsBuilder.UseInMemoryDatabase($"InMemoryTestDb{DateTime.UtcNow.Ticks}");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

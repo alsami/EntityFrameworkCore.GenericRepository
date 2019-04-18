@@ -10,18 +10,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.GenericRepository
 {
-    public class EntityRepository<TEntity, TId> : CommonEntityRepository<TEntity, TId>, IEntityRepository<TEntity, TId> where TEntity : class, IEntity<TId>, new() where TId : IEquatable<TId>
+    public class EntityRepository<TEntity, TId> : CommonEntityRepository<TEntity, TId>, IEntityRepository<TEntity, TId>
+        where TEntity : class, IEntity<TId>, new() where TId : IEquatable<TId>
     {
-        private readonly GenericRepositoryContext context;
+        private readonly DbContext context;
 
-        public EntityRepository(GenericRepositoryContext context) : base(context)
+        public EntityRepository(DbContext context) : base(context)
         {
             this.context = context;
         }
 
         public virtual IEnumerable<TEntity> GetAll()
         {
-            return this.CreateQuery().ToArray();
+            return this
+                .CreateQuery()
+                .ToArray();
+        }
+
+        public virtual IEnumerable<TType> GetAll<TType>(Expression<Func<TEntity, TType>> projectToFunc) where TType : class
+        {
+            return this.CreateQuery()
+                .Select(projectToFunc)
+                .ToArray();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -31,14 +41,39 @@ namespace EntityFrameworkCore.GenericRepository
                 .ConfigureAwait(false);
         }
 
+        public virtual async Task<IEnumerable<TType>> GetAllAsync<TType>(Expression<Func<TEntity, TType>> projectToFunc)
+            where TType : class
+        {
+            return await this.GetQueryAble()
+                .Select(projectToFunc)
+                .ToArrayAsync()
+                .ConfigureAwait(false);
+        }
+
         public virtual IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes)
         {
             return this.BuildIncludes(includes).ToArray();
         }
 
+        public virtual IEnumerable<TType> GetAll<TType>(Expression<Func<TEntity, TType>> projectToFunc,
+            params Expression<Func<TEntity, object>>[] includes) where TType : class
+        {
+            return this.BuildIncludes(includes)
+                .Select(projectToFunc)
+                .ToArray();
+        }
+
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync(params Expression<Func<TEntity, object>>[] includes)
         {
             return await this.BuildIncludes(includes).ToArrayAsync();
+        }
+
+        public virtual async Task<IEnumerable<TType>> GetAllAsync<TType>(Expression<Func<TEntity, TType>> projectToFunc,
+            params Expression<Func<TEntity, object>>[] includes) where TType : class
+        {
+            return await this.BuildIncludes(includes)
+                .Select(projectToFunc)
+                .ToArrayAsync();
         }
 
         public virtual IEnumerable<TEntity> FindAll(Expression<Func<TEntity, bool>> predicate)
@@ -48,10 +83,28 @@ namespace EntityFrameworkCore.GenericRepository
                 .ToArray();
         }
 
+        public virtual IEnumerable<TType> FindAll<TType>(Expression<Func<TEntity, TType>> projectToFunc,
+            Expression<Func<TEntity, bool>> predicate) where TType : class
+        {
+            return this.CreateQuery()
+                .Where(predicate)
+                .Select(projectToFunc)
+                .ToArray();
+        }
+
         public virtual async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await this.CreateQuery()
                 .Where(predicate)
+                .ToArrayAsync()
+                .ConfigureAwait(false);
+        }
+
+        public virtual async Task<IEnumerable<TType>> FindAllAsync<TType>(Expression<Func<TEntity, TType>> projectToFunc, Expression<Func<TEntity, bool>> predicate) where TType : class
+        {
+            return await this.CreateQuery()
+                .Where(predicate)
+                .Select(projectToFunc)
                 .ToArrayAsync()
                 .ConfigureAwait(false);
         }
@@ -64,11 +117,30 @@ namespace EntityFrameworkCore.GenericRepository
                 .ToArray();
         }
 
+        public virtual IEnumerable<TType> FindAll<TType>(Expression<Func<TEntity, TType>> projectToFunc, Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] includes) where TType : class
+        {
+            return this.BuildIncludes(includes)
+                .Where(predicate)
+                .Select(projectToFunc)
+                .ToArray();
+        }
+
         public virtual async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate,
             params Expression<Func<TEntity, object>>[] includes)
         {
             return await this.BuildIncludes(includes)
                 .Where(predicate)
+                .ToArrayAsync()
+                .ConfigureAwait(false);
+        }
+
+        public virtual async Task<IEnumerable<TType>> FindAllAsync<TType>(Expression<Func<TEntity, TType>> projectToFunc, Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] includes) where TType : class
+        {
+            return await this.BuildIncludes(includes)
+                .Where(predicate)
+                .Select(projectToFunc)
                 .ToArrayAsync()
                 .ConfigureAwait(false);
         }
@@ -134,7 +206,7 @@ namespace EntityFrameworkCore.GenericRepository
 
         public async Task<bool> HasMatchingAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await  this.GetQueryAble(true)
+            return await this.GetQueryAble(true)
                 .AnyAsync(predicate);
         }
 
@@ -146,6 +218,16 @@ namespace EntityFrameworkCore.GenericRepository
         public virtual async Task AddAsync(TEntity entity)
         {
             await this.context.Set<TEntity>().AddAsync(entity);
+        }
+
+        public void AddMany(IEnumerable<TEntity> entities)
+        {
+            this.context.Set<TEntity>().AddRange(entities);
+        }
+
+        public async Task AddManyAsync(IEnumerable<TEntity> entities)
+        {
+            await this.context.Set<TEntity>().AddRangeAsync(entities);
         }
 
         public virtual void Edit(TEntity entity)
