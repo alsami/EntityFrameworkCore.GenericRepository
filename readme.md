@@ -54,12 +54,12 @@ public class Customer : IEntity<Guid> // or use abstract GuidEntity
 }
 ```
 
-We would create a `DbContext` that derives from the base-class `GenericRepositoryContext` like this
+We would create a `DbContext` like this
 
 ```csharp
-public class SampleDbContext : GenericRepositoryContext
+public class SampleDbContext : DbContext
 {
-    // must override, is declared as abstract
+    // or use dbcontext options
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         // you could also say
@@ -110,7 +110,7 @@ Now we can register our dependencies with `IServiceCollection` like this
 
 ```csharp
 var serviceProvider = new ServiceCollection()
-    .AddTransient<GenericRepositoryContext, SampleDbContext>()
+    .AddDbContext<DbContext, SampleDbContext>(ServiceLifetime.Transient); // or whatever you need here
     // generic registration
     .AddTransient(typeof(IEntityRepository<,>), typeof(EntityRepository<,>))
     .AddTransient(typeof(IPagingRepository<,>), typeof(PagingRepository<,>)))

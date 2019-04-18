@@ -1,3 +1,63 @@
+# [3.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/3.0.0) (TODO-DATE)
+
+## Breaking changes
+
+The redundant abstraction of `DbContext` has been removed. You now need to derive directly from `DbContext`.
+
+Before 3.0.0:
+
+```csharp
+public class MyDbContext : GenericRepositoryContext 
+{
+  // more here
+}
+```
+
+After:
+
+```csharp
+public class MyDbContext : DbContext 
+{
+  // more here
+}
+```
+
+Please check out the updated samples and docs.
+
+## Features
+
+This release adds a bunch of new APIs
+
+```csharp
+void AddMany(IEnumerable<TEntity> entities); // add many entities sync
+
+Task AddManyAsync(IEnumerable<TEntity> entities); // add many entities async
+
+Task<IEnumerable<TType>> GetAllAsync<TType>(Expression<Func<TEntity, TType>> projectToFunc) where TType : class; // load all into a projection sync
+
+Task<IEnumerable<TType>> GetAllAsync<TType>(Expression<Func<TEntity, TType>> projectToFunc) where TType : class; // load all into a projection async
+
+IEnumerable<TType> GetAll<TType>(Expression<Func<TEntity, TType>> projectToFunc, 
+    params Expression<Func<TEntity, object>>[] includes) where TType : class; // load all into a projection with includes sync
+            
+IEnumerable<TType> GetAll<TType>(Expression<Func<TEntity, TType>> projectToFunc,
+    params Expression<Func<TEntity, object>>[] includes) where TType : class; // load all into a projection with includes async
+    
+IEnumerable<TType> FindAll<TType>(Expression<Func<TEntity, TType>> projectToFunc, 
+    Expression<Func<TEntity, bool>> predicate) where TType : class; // find all and load result into a projection sync
+    
+IEnumerable<TType> FindAllAsync<TType>(Expression<Func<TEntity, TType>> projectToFunc, 
+    Expression<Func<TEntity, bool>> predicate) where TType : class; // find all and load result into a projection async
+
+IEnumerable<TType> FindAll<TType>(Expression<Func<TEntity, TType>> projectToFunc, Expression<Func<TEntity, bool>> predicate, 
+    params Expression<Func<TEntity, object>>[] includes) where TType : class; // find all with includes and load result into a projection sync
+    
+IEnumerable<TType> FindAllAsync<TType>(Expression<Func<TEntity, TType>> projectToFunc, Expression<Func<TEntity, bool>> predicate, 
+    params Expression<Func<TEntity, object>>[] includes) where TType : class; // find all with includes and load result into a projection async 
+```
+
+For more information please have a look at the updated samples and tests.
+
 # [2.2.4](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.2.4) (2019-04-18)
 
 ## Chore

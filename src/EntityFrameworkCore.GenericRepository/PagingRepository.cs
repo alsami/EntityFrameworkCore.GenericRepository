@@ -10,42 +10,49 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.GenericRepository
 {
-    public class PagingRepository<TEntity, TId> : CommonEntityRepository<TEntity, TId>, IPagingRepository<TEntity, TId> where TEntity : class, IEntity<TId>, new() where TId : IEquatable<TId>
+    public class PagingRepository<TEntity, TId> : CommonEntityRepository<TEntity, TId>, IPagingRepository<TEntity, TId>
+        where TEntity : class, IEntity<TId>, new() where TId : IEquatable<TId>
     {
-        private readonly GenericRepositoryContext context;
-        
+        private readonly DbContext context;
+
         private const string IdPropertyName = "Id";
-        
-        public PagingRepository(GenericRepositoryContext context) : base(context)
+
+        public PagingRepository(DbContext context) : base(context)
         {
             this.context = context;
         }
 
-        public virtual PagedModel<TEntity, TId> GetPaged(int page, int size, SortDirection sortDirection = SortDirection.Ascending)
+        public virtual PagedModel<TEntity, TId> GetPaged(int page, int size,
+            SortDirection sortDirection = SortDirection.Ascending)
         {
             var totalCount = this.Count();
 
             var entities = this.CreateQuery()
-                .ApplyOrder<TEntity, TId>(PagingRepository<TEntity, TId>.IdPropertyName, GetOrderMethodName(sortDirection))
+                .ApplyOrder<TEntity, TId>(PagingRepository<TEntity, TId>.IdPropertyName,
+                    GetOrderMethodName(sortDirection))
                 .OrderBy(entity => entity.Id)
                 .Skip((page - 1) * size)
                 .Take(size)
                 .ToArray();
 
-            return new PagedModel<TEntity, TId>(entities, page, size, totalCount, PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
+            return new PagedModel<TEntity, TId>(entities, page, size, totalCount,
+                PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
         }
 
-        public virtual async Task<PagedModel<TEntity, TId>> GetPagedAsync(int page, int size, SortDirection sortDirection = SortDirection.Ascending)
+        public virtual async Task<PagedModel<TEntity, TId>> GetPagedAsync(int page, int size,
+            SortDirection sortDirection = SortDirection.Ascending)
         {
             var totalCount = await this.CountAsync();
 
             var entities = await this.CreateQuery()
-                .ApplyOrder<TEntity, TId>(PagingRepository<TEntity, TId>.IdPropertyName, GetOrderMethodName(sortDirection))
+                .ApplyOrder<TEntity, TId>(PagingRepository<TEntity, TId>.IdPropertyName,
+                    GetOrderMethodName(sortDirection))
                 .Skip((page - 1) * size)
                 .Take(size)
                 .ToArrayAsync();
 
-            return new PagedModel<TEntity, TId>(entities, page, size, totalCount, PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
+            return new PagedModel<TEntity, TId>(entities, page, size, totalCount,
+                PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
         }
 
         public virtual PagedModel<TEntity, TId> GetPaged(int page, int size, string orderByPropertyName,
@@ -101,10 +108,12 @@ namespace EntityFrameworkCore.GenericRepository
                 .Take(size)
                 .ToArrayAsync();
 
-            return new PagedModel<TEntity, TId>(entities, page, size, totalCount, PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
+            return new PagedModel<TEntity, TId>(entities, page, size, totalCount,
+                PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
         }
 
-        public PagedModel<TEntity, TId> GetPaged(int page, int size, string orderByPropertyName, SortDirection sortDirection, Expression<Func<TEntity, bool>> predicate)
+        public PagedModel<TEntity, TId> GetPaged(int page, int size, string orderByPropertyName,
+            SortDirection sortDirection, Expression<Func<TEntity, bool>> predicate)
         {
             var totalCount = this.Count();
 
@@ -115,10 +124,12 @@ namespace EntityFrameworkCore.GenericRepository
                 .Take(size)
                 .ToArray();
 
-            return new PagedModel<TEntity, TId>(entities, page, size, totalCount, PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
+            return new PagedModel<TEntity, TId>(entities, page, size, totalCount,
+                PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
         }
 
-        public async Task<PagedModel<TEntity, TId>> GetPagedAsync(int page, int size, string orderByPropertyName, SortDirection sortDirection, Expression<Func<TEntity, bool>> predicate)
+        public async Task<PagedModel<TEntity, TId>> GetPagedAsync(int page, int size, string orderByPropertyName,
+            SortDirection sortDirection, Expression<Func<TEntity, bool>> predicate)
         {
             var totalCount = await this.CountAsync();
 
@@ -129,10 +140,12 @@ namespace EntityFrameworkCore.GenericRepository
                 .Take(size)
                 .ToArrayAsync();
 
-            return new PagedModel<TEntity, TId>(entities, page, size, totalCount, PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
+            return new PagedModel<TEntity, TId>(entities, page, size, totalCount,
+                PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
         }
 
-        public PagedModel<TEntity, TId> GetPaged(int page, int size, string orderByPropertyName, SortDirection sortDirection, 
+        public PagedModel<TEntity, TId> GetPaged(int page, int size, string orderByPropertyName,
+            SortDirection sortDirection,
             Expression<Func<TEntity, bool>> predicate,
             params Expression<Func<TEntity, object>>[] includes)
         {
@@ -145,10 +158,12 @@ namespace EntityFrameworkCore.GenericRepository
                 .Take(size)
                 .ToArray();
 
-            return new PagedModel<TEntity, TId>(entities, page, size, totalCount, PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
+            return new PagedModel<TEntity, TId>(entities, page, size, totalCount,
+                PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
         }
 
-        public async Task<PagedModel<TEntity, TId>> GetPagedAsync(int page, int size, string orderByPropertyName, SortDirection sortDirection,
+        public async Task<PagedModel<TEntity, TId>> GetPagedAsync(int page, int size, string orderByPropertyName,
+            SortDirection sortDirection,
             Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
         {
             var totalCount = await this.CountAsync();
@@ -160,9 +175,10 @@ namespace EntityFrameworkCore.GenericRepository
                 .Take(size)
                 .ToArrayAsync();
 
-            return new PagedModel<TEntity, TId>(entities, page, size, totalCount, PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
+            return new PagedModel<TEntity, TId>(entities, page, size, totalCount,
+                PagingRepository<TEntity, TId>.IdPropertyName, sortDirection);
         }
-        
+
         private static string GetOrderMethodName(SortDirection sortDirection)
         {
             return !Enum.IsDefined(typeof(SortDirection), sortDirection)

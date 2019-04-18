@@ -12,19 +12,12 @@ namespace EntityFramework.GenericRepository.Tests
 {
     public class PagingRepositoryTests
     {
-        private readonly IPagingRepository<Customer, Guid> customersPagingRepository;
-        private readonly IEntityRepository<Customer, Guid> customersRepository;
         private const string SomeEntityQuantityPropertyName = "CustomerNumber";
-
-        public PagingRepositoryTests()
-        {
-            this.customersPagingRepository = new PagingRepository<Customer, Guid>(new InMemoryGenericContext());
-            this.customersRepository = new EntityRepository<Customer, Guid>(new InMemoryGenericContext());
-        }
 
         [Fact]
         public async Task PagingRepository_AddMultipleWithChildrenAndReadPagedAsync_ExpectSuccess()
         {
+            var (customersRepository, customersPagingRepository) = GetRepositories();
 
             for (var i = 0; i < 100; i++)
             {
@@ -32,14 +25,14 @@ namespace EntityFramework.GenericRepository.Tests
 
                 createCustomer.Addresses = GetNewAddresses(20, createCustomer).ToList();
 
-                this.customersRepository.Add(createCustomer);
+                customersRepository.Add(createCustomer);
                 
-                var added = await this.customersRepository.EnsureChangesAsync();
+                var added = await customersRepository.EnsureChangesAsync();
             }
 
             for (var i = 1; i <= 10; i++)
             {
-                var pagedSet = await this.customersPagingRepository.GetPagedAsync(i, 10, PagingRepositoryTests.SomeEntityQuantityPropertyName);
+                var pagedSet = await customersPagingRepository.GetPagedAsync(i, 10, PagingRepositoryTests.SomeEntityQuantityPropertyName);
 
                 Assert.NotNull(pagedSet);
                 Assert.Equal(10, pagedSet.Entities.Count());
@@ -51,7 +44,7 @@ namespace EntityFramework.GenericRepository.Tests
                     Assert.True(entities[j - 1].CustomerNumber <= entities[j].CustomerNumber);
                 }
 
-                pagedSet = await this.customersPagingRepository.GetPagedAsync(i, 10, PagingRepositoryTests.SomeEntityQuantityPropertyName,
+                pagedSet = await customersPagingRepository.GetPagedAsync(i, 10, PagingRepositoryTests.SomeEntityQuantityPropertyName,
                     SortDirection.Descending);
 
                 Assert.NotNull(pagedSet);
@@ -64,7 +57,7 @@ namespace EntityFramework.GenericRepository.Tests
                     Assert.True(entities[j - 1].CustomerNumber >= entities[j].CustomerNumber);
                 }
 
-                pagedSet = await this.customersPagingRepository.GetPagedAsync(i, 10, PagingRepositoryTests.SomeEntityQuantityPropertyName,
+                pagedSet = await customersPagingRepository.GetPagedAsync(i, 10, PagingRepositoryTests.SomeEntityQuantityPropertyName,
                     SortDirection.Descending, someEntity => someEntity.CustomerNumber >= 120);
 
                 Assert.NotNull(pagedSet);
@@ -78,7 +71,7 @@ namespace EntityFramework.GenericRepository.Tests
                     Assert.True(entities[j - 1].CustomerNumber >= entities[j].CustomerNumber);
                 }
 
-                pagedSet = await this.customersPagingRepository.GetPagedAsync(i, 10, PagingRepositoryTests.SomeEntityQuantityPropertyName,
+                pagedSet = await customersPagingRepository.GetPagedAsync(i, 10, PagingRepositoryTests.SomeEntityQuantityPropertyName,
                     SortDirection.Ascending, someEntity => someEntity.CustomerNumber <= 119);
 
                 Assert.NotNull(pagedSet);
@@ -92,7 +85,7 @@ namespace EntityFramework.GenericRepository.Tests
                     Assert.True(entities[j - 1].CustomerNumber <= entities[j].CustomerNumber);
                 }
 
-                pagedSet = await this.customersPagingRepository.GetPagedAsync(i, 5, PagingRepositoryTests.SomeEntityQuantityPropertyName,
+                pagedSet = await customersPagingRepository.GetPagedAsync(i, 5, PagingRepositoryTests.SomeEntityQuantityPropertyName,
                     SortDirection.Descending, someEntity => someEntity.CustomerNumber >= 120,
                     someEntity => someEntity.Addresses);
 
@@ -107,7 +100,7 @@ namespace EntityFramework.GenericRepository.Tests
                     Assert.True(entities[j - 1].CustomerNumber >= entities[j].CustomerNumber);
                 }
 
-                pagedSet = await this.customersPagingRepository.GetPagedAsync(i, 7, PagingRepositoryTests.SomeEntityQuantityPropertyName,
+                pagedSet = await customersPagingRepository.GetPagedAsync(i, 7, PagingRepositoryTests.SomeEntityQuantityPropertyName,
                     SortDirection.Ascending, someEntity => someEntity.Addresses);
 
                 Assert.NotNull(pagedSet);
@@ -143,6 +136,13 @@ namespace EntityFramework.GenericRepository.Tests
                     Id = Guid.NewGuid()
                 };
             }
+        }
+
+        private static (IEntityRepository<Customer, Guid>, IPagingRepository<Customer, Guid>) GetRepositories()
+        {
+            var context = new InMemoryGenericContext();
+            return (new EntityRepository<Customer, Guid>(context),
+                new PagingRepository<Customer, Guid>(context));
         }
     }
 }

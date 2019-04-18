@@ -10,9 +10,9 @@ namespace EntityFrameworkCore.GenericRepository.Base
 {
     public abstract class CommonEntityRepository<TEntity, TId> : IDisposable, ICommonEntityRepository<TEntity, TId> where TEntity : class, IEntity<TId>, new() where TId : IEquatable<TId>
     {
-        private readonly GenericRepositoryContext context;
+        private readonly DbContext context;
 
-        protected CommonEntityRepository(GenericRepositoryContext context)
+        protected CommonEntityRepository(DbContext context)
         {
             this.context = context;
         }

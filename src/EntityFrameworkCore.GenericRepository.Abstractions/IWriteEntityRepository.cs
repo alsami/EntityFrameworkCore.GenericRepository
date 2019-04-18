@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EntityFrameworkCore.GenericRepository.Shared;
 
@@ -9,6 +10,10 @@ namespace EntityFrameworkCore.GenericRepository.Abstractions
         void Add(TEntity entity);
 
         Task AddAsync(TEntity entity);
+
+        void AddMany(IEnumerable<TEntity> entities);
+
+        Task AddManyAsync(IEnumerable<TEntity> entities);
 
         void Edit(TEntity entity);
 

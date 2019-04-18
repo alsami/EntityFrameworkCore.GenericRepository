@@ -44,8 +44,7 @@ namespace EntityFrameworkCore.GenericRepository.Samples.WebApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] CustomerDto customerDto)
         {
-            var customer = await
-                this.customersRepository.FindAsync(existingCustomer => existingCustomer.Id == customerDto.Id);
+            var customer = await this.customersRepository.FindAsync(existingCustomer => existingCustomer.Id == customerDto.Id);
 
             if (customer == null)
             {
@@ -53,7 +52,7 @@ namespace EntityFrameworkCore.GenericRepository.Samples.WebApi.Controllers
             }
 
             this.mapper.Map(customerDto, customer);
-            
+
             this.customersRepository.Edit(customer);
 
             await this.customersRepository.EnsureChangesAsync();
@@ -70,7 +69,7 @@ namespace EntityFrameworkCore.GenericRepository.Samples.WebApi.Controllers
             {
                 return this.NotFound();
             }
-            
+
             this.customersRepository.Delete(customer);
 
             await this.customersRepository.EnsureChangesAsync();
