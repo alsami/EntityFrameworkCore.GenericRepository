@@ -1,6 +1,5 @@
 ﻿{
   "profiles": {
-    },
     "EntityFrameworkCore.GenericRepository.Samples.WebApi": {
       "commandName": "Project",
       "launchBrowser": false,
