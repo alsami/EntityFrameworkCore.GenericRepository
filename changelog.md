@@ -1,8 +1,8 @@
-# [2.2.2](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.2.2) (2019-03-17)
+# [2.2.4](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.2.4) (2019-04-18)
 
-## Features
+## Chore
 
-* Update ef-core dependencies to 2.2.2
+* Update ef-core dependencies to 2.2.4
 
 ## Chore
 
@@ -11,20 +11,20 @@
 
 # [2.2.1](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.2.1) (2019-02-03)
 
-## Features
+## Chore
 
 * Update ef-core dependencies to 2.2.1
 * Update test and sample projects to .NET-Core 2.2
 
 # [2.2.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.2.0) (2018-12-11)
 
-## Features
+## Chore
 
 * Update ef-core dependencies to 2.2.0
 
 # [2.1.1](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.1.1) (2018-08-27)
 
-## Features
+## Chore
 
 * Update ef-core dependencies to 2.1.2
 
@@ -36,9 +36,13 @@
 
 # [2.0.1](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.0.1) (2018-07-28)
 
-## Features
+
+## Chore
 
 * Update dependencies
+
+## Features
+
 * Remove entityframework-dependency from abstractions project
 
 # [2.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/2.0.0) (2018-07-26)

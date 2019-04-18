@@ -1,0 +1,18 @@
+<Project>
+  <PropertyGroup>
+    <Version>2.2.4</Version>
+    <FileVersion>2.2.4.0</FileVersion>
+    <LangVersion>7.2</LangVersion>
+    <Copyright>2019©CleanCode-Labs</Copyright>
+    <Authors>Sami Al Khatib</Authors>
+    <Licence></Licence>
+    <Title>EntityFrameworkCore-Generic-Repository</Title>
+    <Description>A generic repositry implementation using entityframework core, that can be used and extended easily for all purposes.</Description>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git:/github.com/cleancodelabs/EntityFrameworkCore.GenericRepository</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>EntityFramework, EntityframeworkCore, Generic, Repository, Unambitious</PackageTags>
+    <PackageProjectUrl>https://github.com/cleancodelabs/EntityFrameworkCore.GenericRepository</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/cleancodelabs/EntityFrameworkCore.GenericRepository/master/assets/nuget-icon.png</PackageIconUrl>
+  </PropertyGroup>
+</Project>

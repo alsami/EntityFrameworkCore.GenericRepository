@@ -3,10 +3,6 @@ language: csharp
 solution: entityframeworkcore-genericrepository
 mono: none
 dotnet: 2.2.105
-env:
-  global:
-    - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
-    - DOTNET_CLI_TELEMETRY_OPTOUT=true
 stages:
   - build
   - test
