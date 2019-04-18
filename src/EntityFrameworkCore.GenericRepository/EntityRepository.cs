@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using EntityFrameworkCore.GenericRepository.Abstractions;
 using EntityFrameworkCore.GenericRepository.Base;
-using EntityFrameworkCore.GenericRepository.Extensions;
 using EntityFrameworkCore.GenericRepository.Shared;
 using Microsoft.EntityFrameworkCore;
 

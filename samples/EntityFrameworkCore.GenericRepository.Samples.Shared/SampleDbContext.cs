@@ -1,6 +1,4 @@
-﻿using EntityFrameworkCore.GenericRepository.Abstractions;
-using EntityFrameworkCore.GenericRepository.Samples.Shared.Entities;
-using EntityFrameworkCore.GenericRepository.Samples.Shared.Mappings;
+﻿using EntityFrameworkCore.GenericRepository.Samples.Shared.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.GenericRepository.Samples.Shared

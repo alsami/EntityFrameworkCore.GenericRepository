@@ -1,5 +1,4 @@
-﻿using EntityFrameworkCore.GenericRepository.Abstractions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
 {

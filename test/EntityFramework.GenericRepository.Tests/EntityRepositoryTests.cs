@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using EntityFrameworkCore.GenericRepository;
 using EntityFrameworkCore.GenericRepository.Abstractions;
 using EntityFrameworkCore.GenericRepository.TestInfrastracture;
 using Xunit;
 
-namespace EntityFramework.GenericRepository.IntegrationTests
+namespace EntityFramework.GenericRepository.Tests
 {
     public class EntityRepositoryTests
     {

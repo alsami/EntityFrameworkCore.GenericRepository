@@ -8,7 +8,7 @@ using EntityFrameworkCore.GenericRepository.Shared;
 using EntityFrameworkCore.GenericRepository.TestInfrastracture;
 using Xunit;
 
-namespace EntityFramework.GenericRepository.IntegrationTests
+namespace EntityFramework.GenericRepository.Tests
 {
     public class PagingRepositoryTests
     {
