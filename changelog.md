@@ -1,4 +1,14 @@
-# [3.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/3.0.0) (TODO-DATE)
+# [4.0.0-rc.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/4.0.0-rc.0) (2019-05-17)
+
+## Breaking changes
+
+* All the Entity-Framework libraries have been update to `.NET-Standard 2.1`. If you rely on any of those within a `.NET-Standard 2.0` library, this won't install!
+
+## Features
+
+* `.NET Core 3` and `.NET-Standard 2.1` support!
+
+# [3.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/3.0.0) (2019-05-17)
 
 ## Breaking changes
 

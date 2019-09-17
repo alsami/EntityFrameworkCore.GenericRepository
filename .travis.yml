@@ -1,8 +1,12 @@
 dist: bionic
 language: csharp
-solution: entityframeworkcore-genericrepository
+solution: EntityFrameworkCore.GenericRepository.sln
 mono: none
-dotnet: 2.2.105
+addons:
+  snaps:
+    - name: dotnet-sdk
+      classic: true
+      channel: latest/beta
 stages:
   - build
   - test
@@ -11,12 +15,18 @@ jobs:
   include:
     - stage: build
       name: build solution
+      before_script:
+        - sudo snap alias dotnet-sdk.dotnet dotnet
       script: dotnet restore && dotnet build
     - stage: test
       name: run-tests
+      before_script:
+        - sudo snap alias dotnet-sdk.dotnet dotnet
       script: ./run-tests.sh
     - stage: publish
       name: publish-packages
+      before_script:
+        - sudo snap alias dotnet-sdk.dotnet dotnet
       if: tag IS present
       script: ./publish-packages.sh "$NUGET_SOURCE" "$CLEANCODELABS_NUGET_KEY" "$TRAVIS_TAG"
 

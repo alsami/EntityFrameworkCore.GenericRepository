@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EntityFrameworkCore.GenericRepository.Samples.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/v1/[controller]")]
-    public class CustomersController : Controller
+    public class CustomersController : ControllerBase
     {
         private readonly IEntityRepository<Customer, Guid> customersRepository;
         private readonly IMapper mapper;
