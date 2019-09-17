@@ -15,8 +15,8 @@ namespace EntityFrameworkCore.GenericRepository.Samples.WebApi
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddJsonOptions(options =>
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -32,7 +32,8 @@ namespace EntityFrameworkCore.GenericRepository.Samples.WebApi
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseMvc();
+            app.UseRouting()
+                .UseEndpoints(builder => builder.MapControllers());
         }
     }
 }
