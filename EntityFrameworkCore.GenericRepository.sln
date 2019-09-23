@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{7216EC4B-E
 		publish-packages.sh = publish-packages.sh
 		readme.md = readme.md
 		run-tests.sh = run-tests.sh
+		.travis.yml.bak = .travis.yml.bak
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{2A519AEA-8377-423A-9866-0553C3FEDD01}"

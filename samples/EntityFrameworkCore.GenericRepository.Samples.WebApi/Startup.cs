@@ -3,7 +3,6 @@ using AutoMapper.EquivalencyExpression;
 using EntityFrameworkCore.GenericRepository.Abstractions;
 using EntityFrameworkCore.GenericRepository.Samples.Shared;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -30,7 +29,7 @@ namespace EntityFrameworkCore.GenericRepository.Samples.WebApi
             services.AddAutoMapper(config => config.AddCollectionMappers(), typeof(Startup).Assembly);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseRouting()
                 .UseEndpoints(builder => builder.MapControllers());

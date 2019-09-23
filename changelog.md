@@ -1,4 +1,14 @@
-# [4.0.0-rc.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/4.0.0-rc.0) (2019-05-17)
+# [4.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/4.0.0) (2019-09-23)
+
+## Features
+
+* Same as previous pre-release!
+
+## Breaking changes
+
+* Same as previous pre-release! You need to run on .NET-Core 3 now!
+
+# [4.0.0-rc.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/4.0.0-rc.0) (2019-09-18)
 
 ## Breaking changes
 
