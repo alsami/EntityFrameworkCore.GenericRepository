@@ -1,3 +1,9 @@
+# [4.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/4.0.0) (2019-11-12)
+
+## Features
+
+* Update `Microsoft.EntityFrameworkCore` to version `3.1.0`
+
 # [4.0.0](https://www.nuget.org/packages/CleanCodeLabs.EntityFrameworkCore.GenericRepository/4.0.0) (2019-09-23)
 
 ## Features
