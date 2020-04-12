@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using EntityFrameworkCore.GenericRepository.Shared;
 
-namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
+namespace EntityFramework.GenericRepository.Tests.TestObjects
 {
     public sealed class Customer : IEntity<Guid>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using EntityFrameworkCore.GenericRepository.Shared;
 
-namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
+namespace EntityFramework.GenericRepository.Tests.TestObjects
 {
     public class Address : IEntity<Guid>
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
+namespace EntityFramework.GenericRepository.Tests.TestObjects
 {
     public class CustomerDto
     {

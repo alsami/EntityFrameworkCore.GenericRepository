@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EntityFramework.GenericRepository.Tests.TestObjects;
 using EntityFrameworkCore.GenericRepository;
 using EntityFrameworkCore.GenericRepository.Abstractions;
 using EntityFrameworkCore.GenericRepository.Shared;
-using EntityFrameworkCore.GenericRepository.TestInfrastracture;
 using Xunit;
 
 namespace EntityFramework.GenericRepository.Tests

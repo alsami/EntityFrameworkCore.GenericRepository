@@ -1,4 +1,4 @@
-namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
+namespace EntityFramework.GenericRepository.Tests.TestObjects
 {
     public class AddressDto
     {

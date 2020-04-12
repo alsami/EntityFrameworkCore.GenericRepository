@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace EntityFrameworkCore.GenericRepository.TestInfrastracture
+namespace EntityFramework.GenericRepository.Tests.TestObjects
 {
     public class InMemoryGenericContext : DbContext
     {

@@ -14,7 +14,8 @@ namespace EntityFrameworkCore.GenericRepository.Samples.WebApi
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
+            services
+                .AddControllers()
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
